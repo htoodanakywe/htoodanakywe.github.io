@@ -99,7 +99,7 @@ nav .container {
     text-align: center;
     padding: 100px 20px 60px;
     border-radius: 0 0 30px 30px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .hero-content {
@@ -183,7 +183,7 @@ section {
 #services {
     background: #f8f9fa;
     margin-top: -40px;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 .services-grid {
