@@ -1,3 +1,10 @@
+// Wave text animation
+const waveText = document.querySelector('.wave-text');
+const text = 'Building Dreams, Creating Spaces';
+waveText.innerHTML = text.split('').map((char, i) => 
+    `<span style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>`
+).join('');
+
 // Mobile menu toggle
 const burger = document.querySelector('.burger');
 const navLinks = document.querySelector('.nav-links');
