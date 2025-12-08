@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Golden Palace Condominium",
+    "details": "12-story residential building - Yangon (2023)",
+    "image": "img/projects/projectdefault.JPG"
+  },
+  {
+    "title": "Shwe Taung Tan Restaurant",
+    "details": "Traditional Myanmar interior design - Mandalay (2023)",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400"
+  },
+  {
+    "title": "Tech Hub Office",
+    "details": "Modern co-working space renovation - Yangon (2024)",
+    "image": "img/projects/projectdefault.JPG"
+  },
+  {
+    "title": "Royal Villa Residence",
+    "details": "Luxury 3-story villa with pool - Naypyidaw (2023)",
+    "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400"
+  },
+  {
+    "title": "Pearl Shopping Center",
+    "details": "Retail space interior design - Yangon (2024)",
+    "image": "img/projects/projectdefault.JPG"
+  },
+  {
+    "title": "Green Valley Housing",
+    "details": "50-unit housing project - Mandalay (2022)",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400"
+  }
+]
