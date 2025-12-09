@@ -569,21 +569,27 @@ footer {
         grid-template-columns: 1fr auto auto;
         grid-template-areas: "logo lang burger";
         align-items: center;
-        gap: 0.8rem;
+        gap: 0.5rem;
+        padding: 0.5rem 15px;
     }
 
     .logo {
         grid-area: logo;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
+        gap: 8px;
+        white-space: nowrap;
+        min-width: 0;
     }
 
     .logo-img {
-        height: 35px;
+        height: 32px;
+        flex-shrink: 0;
     }
 
     .lang-switcher {
         grid-area: lang;
         padding: 2px;
+        gap: 2px;
     }
 
     .burger {
@@ -592,12 +598,17 @@ footer {
     }
 
     .lang-btn {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.8rem;
+        padding: 0.25rem 0.4rem;
+        font-size: 0.75rem;
+        gap: 0.2rem;
     }
 
     .lang-icon {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+    }
+    
+    .lang-text {
+        font-size: 0.7rem;
     }
 
     .nav-links {
