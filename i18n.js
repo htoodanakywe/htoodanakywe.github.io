@@ -1,6 +1,13 @@
 const translations = {
     en: {
-        nav: {home: 'Home', services: 'Services', about: 'About', projects: 'Projects', contact: 'Contact'},
+        nav: {
+            companyname: "Htoo Dana Kywe",
+            home: 'Home',
+            services: 'Services',
+            about: 'About',
+            projects: 'Projects',
+            contact: 'Contact'
+        },
         hero: {
             title: 'Build your Dreams with Us',
             subtitle1: 'Professional Construction & Interior Decoration Services',
@@ -70,6 +77,7 @@ const translations = {
     },
     my: {
         nav: {
+            companyname: "ထူးဓနကြွယ်",
             home: 'ပင်မ',
             services: 'ဝန်ဆောင်မှုများ',
             about: 'အကြောင်း',
@@ -140,7 +148,7 @@ const translations = {
             construction: 'ဆောက်လုပ်ရေး',
             interior: 'အတွင်းပိုင်း ဒီဇိုင်း',
             renovation: 'ပြန်လည်မွမ်းမံခြင်း',
-            copyright: '© ၂၀၂၄ ထူးဓနကျော် ဆောက်လုပ်ရေးနှင့် အလှဆင်ခြင်း။ မူပိုင်ခွင့်များ လေးစားသည်။'
+            copyright: '© ၂၀၂၄ ထူးဓနကြွယ် ဆောက်လုပ်ရေးနှင့် အလှဆင်ခြင်း။ မူပိုင်ခွင့်များ လေးစားသည်။'
         }
     }
 };
