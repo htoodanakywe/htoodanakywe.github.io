@@ -17,12 +17,22 @@
                 <span>Htoo Dana Kywe</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li><a href="#about" data-i18n="nav.about">About</a></li>
+                <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">
+                    <span class="lang-icon">🌐</span>
+                    <span class="lang-text">EN</span>
+                </button>
+                <button class="lang-btn" data-lang="my" onclick="switchLanguage('my')">
+                    <span class="lang-icon">🇲🇲</span>
+                    <span class="lang-text">မြန်မာ</span>
+                </button>
+            </div>
             <div class="burger">
                 <div></div>
                 <div></div>
@@ -34,55 +44,55 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h2 class="wave-text"></h2>
-            <p>Professional Construction & Interior Decoration Services</p>
-            <p>Over 8 Years of Excellence in Myanmar</p>
-            <a href="#contact" class="btn">Get Free Quote</a>
+            <p data-i18n="hero.subtitle1">Professional Construction & Interior Decoration Services</p>
+            <p data-i18n="hero.subtitle2">Over 8 Years of Excellence in Myanmar</p>
+            <a href="#contact" class="btn" data-i18n="hero.cta">Get Free Quote</a>
         </div>
     </section>
 
     <section id="services">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
+            <h2 class="section-title" data-i18n="services.title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="icon">🏗️</div>
-                    <h3>Building Construction</h3>
-                    <p>Residential & commercial buildings, condominiums, housing projects with quality materials and skilled workforce</p>
+                    <h3 data-i18n="services.construction">Building Construction</h3>
+                    <p data-i18n="services.constructionDesc">Residential & commercial buildings, condominiums, housing projects with quality materials and skilled workforce</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🎨</div>
-                    <h3>Interior Design</h3>
-                    <p>Modern, classic & minimalist designs for homes, offices, restaurants, and retail spaces</p>
+                    <h3 data-i18n="services.interior">Interior Design</h3>
+                    <p data-i18n="services.interiorDesc">Modern, classic & minimalist designs for homes, offices, restaurants, and retail spaces</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🔨</div>
-                    <h3>Renovation & Remodeling</h3>
-                    <p>Kitchen, bathroom, office renovations, structural modifications, and space optimization</p>
+                    <h3 data-i18n="services.renovation">Renovation & Remodeling</h3>
+                    <p data-i18n="services.renovationDesc">Kitchen, bathroom, office renovations, structural modifications, and space optimization</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">✨</div>
-                    <h3>Decoration & Finishing</h3>
-                    <p>Painting, wallpaper, flooring, ceiling work, lighting installation, and custom furniture</p>
+                    <h3 data-i18n="services.decoration">Decoration & Finishing</h3>
+                    <p data-i18n="services.decorationDesc">Painting, wallpaper, flooring, ceiling work, lighting installation, and custom furniture</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🏠</div>
-                    <h3>Architectural Planning</h3>
-                    <p>3D design, floor plans, structural engineering, and building permits assistance</p>
+                    <h3 data-i18n="services.architectural">Architectural Planning</h3>
+                    <p data-i18n="services.architecturalDesc">3D design, floor plans, structural engineering, and building permits assistance</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🛠️</div>
-                    <h3>Maintenance Services</h3>
-                    <p>Post-construction support, repairs, waterproofing, and regular maintenance contracts</p>
+                    <h3 data-i18n="services.maintenance">Maintenance Services</h3>
+                    <p data-i18n="services.maintenanceDesc">Post-construction support, repairs, waterproofing, and regular maintenance contracts</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">🌳</div>
-                    <h3>Landscaping & Outdoor Design</h3>
-                    <p>Garden design, outdoor living spaces, drainage systems, hardscaping, and complete exterior transformations</p>
+                    <h3 data-i18n="services.landscaping">Landscaping & Outdoor Design</h3>
+                    <p data-i18n="services.landscapingDesc">Garden design, outdoor living spaces, drainage systems, hardscaping, and complete exterior transformations</p>
                 </div>
                 <div class="service-card">
                     <div class="icon">📋</div>
-                    <h3>Project Consultation & Management</h3>
-                    <p>Free site inspection, cost estimation, material sourcing, timeline planning, and quality control supervision</p>
+                    <h3 data-i18n="services.consultation">Project Consultation & Management</h3>
+                    <p data-i18n="services.consultationDesc">Free site inspection, cost estimation, material sourcing, timeline planning, and quality control supervision</p>
                 </div>
             </div>
         </div>
@@ -90,27 +100,27 @@
 
     <section id="about">
         <div class="container">
-            <h2 class="section-title">Why Choose Us</h2>
+            <h2 class="section-title" data-i18n="about.title">Why Choose Us</h2>
             <div class="about-grid">
                 <div class="about-card">
                     <div class="about-icon">💼</div>
-                    <h3>8+ Years Experience</h3>
-                    <p>Trusted by hundreds of clients across Myanmar</p>
+                    <h3 data-i18n="about.exp">8+ Years Experience</h3>
+                    <p data-i18n="about.expDesc">Trusted by hundreds of clients across Myanmar</p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon">👷</div>
-                    <h3>Expert Team</h3>
-                    <p>Licensed engineers, architects, and skilled craftsmen</p>
+                    <h3 data-i18n="about.team">Expert Team</h3>
+                    <p data-i18n="about.teamDesc">Licensed engineers, architects, and skilled craftsmen</p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon">⚡</div>
-                    <h3>On-Time Delivery</h3>
-                    <p>95% of projects completed within deadline</p>
+                    <h3 data-i18n="about.delivery">On-Time Delivery</h3>
+                    <p data-i18n="about.deliveryDesc">95% of projects completed within deadline</p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon">💰</div>
-                    <h3>Competitive Pricing</h3>
-                    <p>Quality work at fair and transparent rates</p>
+                    <h3 data-i18n="about.pricing">Competitive Pricing</h3>
+                    <p data-i18n="about.pricingDesc">Quality work at fair and transparent rates</p>
                 </div>
             </div>
         </div>
@@ -118,27 +128,27 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 class="section-title" data-i18n="projects.title">Featured Projects</h2>
             <div class="projects-grid" id="projects-container"></div>
         </div>
     </section>
 
     <section id="testimonials">
         <div class="container">
-            <h2 class="section-title">Client Testimonials</h2>
+            <h2 class="section-title" data-i18n="testimonials.title">Client Testimonials</h2>
             <div class="testimonials-grid" id="testimonials-container"></div>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
-            <h2 class="section-title">Contact Us</h2>
+            <h2 class="section-title" data-i18n="contact.title">Contact Us</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="info-item">
                         <span class="icon">📞</span>
                         <div>
-                            <h4>Phone</h4>
+                            <h4 data-i18n="contact.phone">Phone</h4>
                             <p>+95 9 123 456 789</p>
                             <p>+95 9 987 654 321</p>
                         </div>
@@ -146,7 +156,7 @@
                     <div class="info-item">
                         <span class="icon">📧</span>
                         <div>
-                            <h4>Email</h4>
+                            <h4 data-i18n="contact.email">Email</h4>
                             <p>info@htoodanakywe.com</p>
                             <p>contact@htoodanakywe.com</p>
                         </div>
@@ -154,34 +164,34 @@
                     <div class="info-item">
                         <span class="icon">📍</span>
                         <div>
-                            <h4>Office</h4>
-                            <p>No. 123, Pyay Road</p>
-                            <p>Kamayut Township, Yangon</p>
+                            <h4 data-i18n="contact.office">Office</h4>
+                            <p data-i18n="contact.address1">No. 123, Pyay Road</p>
+                            <p data-i18n="contact.address2">Kamayut Township, Yangon</p>
                         </div>
                     </div>
                     <div class="info-item">
                         <span class="icon">⏰</span>
                         <div>
-                            <h4>Working Hours</h4>
-                            <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
-                            <p>Sunday: Closed</p>
+                            <h4 data-i18n="contact.hours">Working Hours</h4>
+                            <p data-i18n="contact.hoursValue">Mon - Sat: 8:00 AM - 6:00 PM</p>
+                            <p data-i18n="contact.sunday">Sunday: Closed</p>
                         </div>
                     </div>
                 </div>
                 <form class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="tel" placeholder="Your Phone" required>
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" data-i18n-placeholder="contact.namePlaceholder" placeholder="Your Name" required>
+                    <input type="tel" data-i18n-placeholder="contact.phonePlaceholder" placeholder="Your Phone" required>
+                    <input type="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Your Email" required>
                     <select required>
-                        <option value="">Select Service</option>
-                        <option value="construction">Building Construction</option>
-                        <option value="interior">Interior Design</option>
-                        <option value="renovation">Renovation</option>
-                        <option value="decoration">Decoration</option>
+                        <option value="" data-i18n="contact.selectService">Select Service</option>
+                        <option value="construction" data-i18n="services.construction">Building Construction</option>
+                        <option value="interior" data-i18n="services.interior">Interior Design</option>
+                        <option value="renovation" data-i18n="services.renovation">Renovation</option>
+                        <option value="decoration" data-i18n="services.decoration">Decoration</option>
                         <option value="other">Other</option>
                     </select>
-                    <textarea placeholder="Project Details" rows="4" required></textarea>
-                    <button type="submit" class="btn">Request Quote</button>
+                    <textarea data-i18n-placeholder="contact.detailsPlaceholder" placeholder="Project Details" rows="4" required></textarea>
+                    <button type="submit" class="btn" data-i18n="contact.submit">Request Quote</button>
                 </form>
             </div>
         </div>
@@ -192,32 +202,33 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Htoo Dana Kywe</h3>
-                    <p>Your trusted partner in construction and decoration since 2009</p>
+                    <p data-i18n="footer.tagline">Your trusted partner in construction and decoration since 2009</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <p><a href="#services">Services</a></p>
-                    <p><a href="#projects">Projects</a></p>
-                    <p><a href="#contact">Contact</a></p>
+                    <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+                    <p><a href="#services" data-i18n="nav.services">Services</a></p>
+                    <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
+                    <p><a href="#contact" data-i18n="nav.contact">Contact</a></p>
                 </div>
                 <div class="footer-section">
-                    <h4>Services</h4>
-                    <p>Construction</p>
-                    <p>Interior Design</p>
-                    <p>Renovation</p>
+                    <h4 data-i18n="footer.servicesTitle">Services</h4>
+                    <p data-i18n="footer.construction">Construction</p>
+                    <p data-i18n="footer.interior">Interior Design</p>
+                    <p data-i18n="footer.renovation">Renovation</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
+                    <h4 data-i18n="footer.contactTitle">Contact</h4>
                     <p>📞 +95 9 123 456 789</p>
                     <p>📧 info@htoodanakywe.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Htoo Dana Kywe Construction & Decoration. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 Htoo Dana Kywe Construction & Decoration. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

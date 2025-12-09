@@ -1,9 +1,20 @@
 // Wave text animation
-const waveText = document.querySelector('.wave-text');
-const text = 'Building Dreams, Creating Spaces';
-waveText.innerHTML = text.split('').map((char, i) => 
-    `<span style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>`
-).join('');
+function updateWaveText() {
+    const waveText = document.querySelector('.wave-text');
+    const text = t('hero.title');
+    if (currentLang === 'my') {
+        waveText.innerHTML = text.split(' ').map((word, i) => 
+            `<span style="animation-delay: ${i * 0.1}s">${word}</span>`
+        ).join(' ');
+    } else {
+        waveText.innerHTML = text.split('').map((char, i) => 
+            `<span style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>`
+        ).join('');
+    }
+}
+
+window.addEventListener('languageChanged', updateWaveText);
+document.addEventListener('DOMContentLoaded', updateWaveText);
 
 // Mobile menu toggle
 const burger = document.querySelector('.burger');
@@ -70,6 +81,6 @@ fetch('testimonials.json')
 // Form submission
 document.querySelector('.contact-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Thank you for your message! We will contact you soon.');
+    alert(t('contact.successMsg'));
     e.target.reset();
 });
