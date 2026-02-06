@@ -365,3 +365,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea
+
+# vscode
+.vscode
+
+# AI
+.kiro

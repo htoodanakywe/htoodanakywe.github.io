@@ -1,0 +1,75 @@
+[
+  {
+    "title": "Golden Palace Condominium",
+    "details": "12-story residential building - Yangon (2023)",
+    "images": [
+      "img/projects/projectdefault.JPG",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
+    ]
+  },
+  {
+    "title": "Shwe Taung Tan Restaurant",
+    "details": "Traditional Myanmar interior design - Mandalay (2023)",
+    "images": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+      "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=800"
+    ]
+  },
+  {
+    "title": "Tech Hub Office",
+    "details": "Modern co-working space renovation - Yangon (2024)",
+    "images": [
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG"
+    ]
+  },
+  {
+    "title": "Royal Villa Residence",
+    "details": "Luxury 3-story villa with pool - Naypyidaw (2023)",
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800"
+    ]
+  },
+  {
+    "title": "Pearl Shopping Center",
+    "details": "Retail space interior design - Yangon (2024)",
+    "images": [
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG"
+    ]
+  },
+  {
+    "title": "Green Valley Housing",
+    "details": "50-unit housing project - Mandalay (2022)",
+    "images": [
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG",
+      "img/projects/projectdefault.JPG"
+    ]
+  }
+]
