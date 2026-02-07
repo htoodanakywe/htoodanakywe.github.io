@@ -1,75 +1,246 @@
 [
   {
-    "title": "Golden Palace Condominium",
-    "details": "12-story residential building - Yangon (2023)",
+    "title": "Htoo Dana Kywe Office",
+    "details": "8-story residential building - Taunggyi",
     "images": [
-      "img/projects/projectdefault.JPG",
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
+      "img/projects/Office/p1.jpeg",
+      "img/projects/Office/p2.jpeg",
+      "img/projects/Office/p3.jpeg",
+      "img/projects/Office/p4.jpeg",
+      "img/projects/Office/p5.jpeg",
+      "img/projects/Office/p6.jpeg",
+      "img/projects/Office/p7.jpeg",
+      "img/projects/Office/p8.jpeg"
     ]
   },
   {
-    "title": "Shwe Taung Tan Restaurant",
-    "details": "Traditional Myanmar interior design - Mandalay (2023)",
+    "title": "U Tun Kyaw",
+    "details": "10-U Tun Kyaw",
     "images": [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800",
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
-      "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=800"
+      "img/projects/U Tun Kyaw/p1.jpg",
+      "img/projects/U Tun Kyaw/p2.jpg",
+      "img/projects/U Tun Kyaw/p3.PNG",
+      "img/projects/U Tun Kyaw/p4.JPEG",
+      "img/projects/U Tun Kyaw/p5.JPEG",
+      "img/projects/U Tun Kyaw/p6.JPEG",
+      "img/projects/U Tun Kyaw/p7.JPEG",
+      "img/projects/U Tun Kyaw/p8.JPEG",
+      "img/projects/U Tun Kyaw/p9.JPEG",
+      "img/projects/U Tun Kyaw/p10.PNG",
     ]
   },
   {
-    "title": "Tech Hub Office",
-    "details": "Modern co-working space renovation - Yangon (2024)",
+    "title": "No_9_Pine Hub cafe",
+    "details": "7-story Hub cafe - Taunggyi",
     "images": [
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG"
+      "img/projects/No_9_Pine Hub cafe/p1.JPG",
+      "img/projects/No_9_Pine Hub cafe/p2.HEIC",
+      "img/projects/No_9_Pine Hub cafe/p2.JPG",
+      "img/projects/No_9_Pine Hub cafe/p4.HEIC",
+      "img/projects/No_9_Pine Hub cafe/p5.HEIC",
+      "img/projects/No_9_Pine Hub cafe/p6.JPG",
+      "img/projects/No_9_Pine Hub cafe/p7.JPG"
     ]
   },
   {
-    "title": "Royal Villa Residence",
-    "details": "Luxury 3-story villa with pool - Naypyidaw (2023)",
+    "title": "ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)",
+    "details": "11-story ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ) - Taunggyi",
     "images": [
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800"
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p1.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p2.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p3.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p4.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p5.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p6.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p7.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p8.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p9.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p9.HEIC",
+      "img/projects/ကိုစိုင်းလုံဝိုင်း(ဘုရားဖြူ)/p11.HEIC"
     ]
   },
   {
-    "title": "Pearl Shopping Center",
-    "details": "Retail space interior design - Yangon (2024)",
+    "title": "Dr.Soe Min Thu(Nyaung Shwe)",
+    "details": "15-story Dr.Soe Min Thu(Nyaung Shwe) - Nyaung Shwe",
     "images": [
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG"
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p1.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p2.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p3.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p4.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p5.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p6.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p7.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p8.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p9.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p10.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p11.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p12.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p13.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p14.JPG",
+      "img/projects/Dr.Soe Min Thu(Nyaung Shwe)/p15.JPG"
     ]
   },
   {
-    "title": "Green Valley Housing",
-    "details": "50-unit housing project - Mandalay (2022)",
+    "title": "ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_",
+    "details": "9-story ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_ - Aye Thar Yar",
     "images": [
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG",
-      "img/projects/projectdefault.JPG"
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p1.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p2.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p3.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p4.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p5.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p6.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p7.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p8.JPG",
+      "img/projects/ဒေါ်ခင်နှင်းအေး (Aye Thar Yar) 1-Storeyed RCC_/p9.JPG"
+    ]
+  },
+  {
+    "title": "မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house",
+    "details": "14-story မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house",
+    "images": [
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p1.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p2.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p3.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p4.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p5.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p6.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p7.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p8.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p9.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p10.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p11.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p12.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p13.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p14.JPG"
+    ]
+  },
+  {
+    "title": "ဦးစိန်(ဘုရားဖြူ)",
+    "details": "3-story ဦးစိန်(ဘုရားဖြူ)",
+    "images": [
+      "img/projects/ဦးစိန်(ဘုရားဖြူ)/p1.JPG",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p1.jpeg",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p2.jpeg",
+      "img/projects/မရွှေရွှေ ဘုရားဖြူ(41’x30’) RC 2.5 storey house/p3.jpeg"
+    ]
+  },
+  {
+    "title": "No.8 December Store",
+    "details": "10-story No.8 December Store",
+    "images": [
+      "img/projects/No.8 December Store/p1.jpg",
+      "img/projects/No.8 December Store/p2.jpg",
+      "img/projects/No.8 December Store/p3.jpg",
+      "img/projects/No.8 December Store/p4.jpg",
+      "img/projects/No.8 December Store/p5.jpg",
+      "img/projects/No.8 December Store/p6.jpg",
+      "img/projects/No.8 December Store/p7.jpg",
+      "img/projects/No.8 December Store/p8.jpg",
+      "img/projects/No.8 December Store/p9.jpg",
+      "img/projects/No.8 December Store/p10.jpg"
+    ]
+  },
+  {
+    "title": "Supreme Bio Tech VIP_",
+    "details": "12-story No.8 December Store",
+    "images": [
+      "img/projects/Supreme Bio Tech VIP_/p1.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p2.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p3.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p4.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p5.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p6.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p7.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p8.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p9.JPG",
+      "img/projects/Supreme Bio Tech VIP_/p10.jpg",
+      "img/projects/Supreme Bio Tech VIP_/p11.jpg",
+      "img/projects/Supreme Bio Tech VIP_/p12.jpg",
+    ]
+  },
+  {
+    "title": "ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design",
+    "details": "12-ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design",
+    "images": [
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p1.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p2.JPG",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p3.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p4.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p5.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p6.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p7.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p8.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p9.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p10.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p11.HEIC",
+      "img/projects/ကိုအားဝေ(37’x35’)RC 1- storey house, Classic Design_/p12.JPG"
+    ]
+  },
+  {
+    "title": "ဒေါ်ကျင်မိန့်(အေးသာယာ)",
+    "details": "4-ဒေါ်ကျင်မိန့်(အေးသာယာ)",
+    "images": [
+      "img/projects/ဒေါ်ကျင်မိန့်(အေးသာယာ)/p1.JPG",
+      "img/projects/ဒေါ်ကျင်မိန့်(အေးသာယာ)/p2.png",
+      "img/projects/ဒေါ်ကျင်မိန့်(အေးသာယာ)/p3.png",
+      "img/projects/ဒေါ်ကျင်မိန့်(အေးသာယာ)/p4.png"
+    ]
+  },
+  {
+    "title": "ဒမလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)",
+    "details": "10-မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)",
+    "images": [
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p1.jpg",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p2.png",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p3.png",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p4.JPG",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p5.JPG",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p6.JPG",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p7.HEIC",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p8.HEIC",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p9.HEIC",
+      "img/projects/မလင်းလင်းနွယ်( ဂနိုင်ရွေးရွာ)/p10.HEIC"
+    ]
+  },
+  {
+    "title": "ဝင်းသော်( ဘုရားဖြူ)",
+    "details": "10-ဝင်းသော်( ဘုရားဖြူ)",
+    "images": [
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p1.jpg",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p2.jpg",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p3.jpg",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p4.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p5.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p6.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p7.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p8.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p9.png",
+      "img/projects/ဝင်းသော်( ဘုရားဖြူ)/p10.png"
+    ]
+  },
+  {
+    "title": "ဝါးပြား",
+    "details": "2-ဝါးပြား",
+    "images": [
+      "img/projects/ဝါးပြား/p1.png",
+      "img/projects/ဝါးပြား/p2.png"
+    ]
+  },
+  {
+    "title": "အမိုးချို(ဘုရားဖြူ)",
+    "details": "10-အမိုးချို(ဘုရားဖြူ)",
+    "images": [
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p1.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p2.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p3.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p4.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p5.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p6.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p7.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p8.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p8.PNG",
+      "img/projects/အမိုးချို(ဘုရားဖြူ)/p10.PNG"
     ]
   }
 ]
