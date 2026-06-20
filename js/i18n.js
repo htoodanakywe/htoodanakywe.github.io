@@ -66,7 +66,7 @@ const translations = {
             successMsg: 'Thank you for your message! We will contact you soon.'
         },
         footer: {
-            tagline: 'Your trusted partner in construction and decoration since 2009',
+            tagline: 'Your trusted partner in construction and decoration since 2018',
             quickLinks: 'Quick Links',
             servicesTitle: 'Services',
             contactTitle: 'Contact',
@@ -143,7 +143,7 @@ const translations = {
             successMsg: 'သင့်မက်ဆေ့ချ်အတွက် ကျေးဇူးတင်ပါသည်။ မကြာမီ ဆက်သွယ်ပါမည်။'
         },
         footer: {
-            tagline: '၂၀၀၉ ခုနှစ်မှစ၍ ဆောက်လုပ်ရေးနှင့် အလှဆင်ခြင်းတွင် သင့်ယုံကြည်ရသော လုပ်ဖော်ကိုင်ဖက်',
+            tagline: '၂၀၁၈ ခုနှစ်မှစ၍ ဆောက်လုပ်ရေးနှင့် အလှဆင်ခြင်းတွင် သင့်ယုံကြည်ရသော လုပ်ဖော်ကိုင်ဖက်',
             quickLinks: 'လင့်ခ်များ',
             servicesTitle: 'ဝန်ဆောင်မှုများ',
             contactTitle: 'ဆက်သွယ်ရန်',
