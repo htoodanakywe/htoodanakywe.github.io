@@ -12,7 +12,11 @@ const translations = {
             title: 'Build your Dreams with Us',
             subtitle1: 'Professional Construction & Interior Decoration Services',
             subtitle2: 'Over 8 Years of Excellence in Myanmar',
-            cta: 'Get Free Quote'
+            cta: 'Get Free Quote',
+            cta2: 'View Projects',
+            stat1: 'Projects Completed',
+            stat2: 'Years Experience',
+            stat3: 'On-Time Delivery'
         },
         services: {
             title: 'Our Services',
@@ -44,7 +48,7 @@ const translations = {
             pricing: 'Competitive Pricing',
             pricingDesc: 'Quality work at fair and transparent rates'
         },
-        projects: {title: 'Featured Projects'},
+        projects: {title: 'Featured Projects', loadMore: 'View More Projects'},
         testimonials: {title: 'Client Testimonials'},
         contact: {
             title: 'Contact Us',
@@ -89,6 +93,10 @@ const translations = {
             title: 'ကျွန်ုပ်တို့နှင့်အတူ သင့်အိပ်မက်များကို တည်ဆောက်လိုက်ပါ',
             subtitle1: 'ပရော်ဖက်ရှင်နယ် ဆောက်လုပ်ရေးနှင့် အတွင်းပိုင်း အလှဆင်ဝန်ဆောင်မှုများ',
             subtitle2: 'မြန်မာနိုင်ငံတွင် ၈ နှစ်ကျော် အတွေ့အကြုံ',
+            cta2: 'ပရောဂျက်များ ကြည့်ရှုရန်',
+            stat1: 'ပြီးစီးသော ပရောဂျက်များ',
+            stat2: 'နှစ် အတွေ့အကြုံ',
+            stat3: 'အချိန်မီ ပြီးစီးမှု',
             cta: 'ခန့်မှန်းကုန်ကျစရိတ် တွက်ချက်မှု့ အခမဲ့ ရယူရန်'
         },
         services: {
@@ -121,7 +129,7 @@ const translations = {
             pricing: 'ယှဉ်ပြိုင်နိုင်သော စျေးနှုန်း',
             pricingDesc: 'တရားမျှတပြီး ပွင့်လင်းသော နှုန်းထားဖြင့် အရည်အသွေးမြင့် လုပ်ငန်း'
         },
-        projects: {title: 'ထူးခြားသော ပရောဂျက်များ'},
+        projects: {title: 'ထူးခြားသော ပရောဂျက်များ', loadMore: 'နောက်ထပ် ပရောဂျက်များ ကြည့်ရန်'},
         testimonials: {title: 'ဖောက်သည်များ၏ သက်သေခံချက်များ'},
         contact: {
             title: 'ဆက်သွယ်ရန်',
