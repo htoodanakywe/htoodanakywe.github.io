@@ -58,6 +58,9 @@ const lightboxState = {
 // Default placeholder shown when a project has no browser-displayable images
 const DEFAULT_PROJECT_IMAGE = 'img/projects/projectdefault.JPG';
 
+// How many project cards to show before the "View more projects" button
+const PROJECTS_PER_PAGE = 6;
+
 // Browsers cannot render HEIC/HEIF images, so treat those as non-displayable.
 function isDisplayableImage(src) {
     return typeof src === 'string' && !/\.(heic|heif)\s*$/i.test(src.trim());
@@ -601,6 +604,113 @@ function updateNavigationVisibility() {
     nextBtn.style.display = hasMultipleImages ? 'block' : 'none';
 }
 
+// ===== Modern UI behaviors: scroll reveal, counters, back-to-top, pagination =====
+let revealObserver = null;
+
+// Adds an element to the scroll-reveal system. Works for both static and
+// dynamically created elements. If no observer exists (reduced motion or
+// unsupported browser), the element is shown immediately.
+function observeReveal(el) {
+    if (!el) return;
+    el.classList.add('reveal');
+    if (revealObserver) {
+        revealObserver.observe(el);
+    } else {
+        el.classList.add('in-view');
+    }
+}
+
+function initScrollReveal() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+        revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }
+    document.querySelectorAll('.section-title, .service-card, .about-card')
+        .forEach(observeReveal);
+}
+
+// Counts up from 0 to the element's data-count, appending data-suffix (+, %).
+function animateCounter(el) {
+    const target = parseInt(el.dataset.count, 10) || 0;
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            el.textContent = target + suffix;
+        }
+    }
+    requestAnimationFrame(tick);
+}
+
+function initCounters() {
+    const nums = document.querySelectorAll('.stat-num');
+    if (!nums.length) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+        nums.forEach(el => {
+            el.textContent = (el.dataset.count || '0') + (el.dataset.suffix || '');
+        });
+        return;
+    }
+    const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                o.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    nums.forEach(el => obs.observe(el));
+}
+
+function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    const toggle = () => btn.classList.toggle('visible', window.scrollY > 500);
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Wires up the "View more projects" button to reveal cards a page at a time.
+function initLoadMore() {
+    const btn = document.getElementById('load-more');
+    if (!btn) return;
+    const container = document.getElementById('projects-container');
+    const remaining = () => container.querySelectorAll('.project-card.is-hidden');
+
+    if (remaining().length === 0) {
+        btn.style.display = 'none';
+        return;
+    }
+    btn.style.display = 'inline-block';
+
+    btn.addEventListener('click', () => {
+        const hidden = remaining();
+        for (let i = 0; i < PROJECTS_PER_PAGE && i < hidden.length; i++) {
+            hidden[i].classList.remove('is-hidden');
+        }
+        if (remaining().length === 0) {
+            btn.style.display = 'none';
+        }
+    });
+}
+
 // Load projects from JSON
 fetch('data/projects.json')
     .then(response => response.json())
@@ -612,6 +722,12 @@ fetch('data/projects.json')
         lightboxState.projects.forEach((project, index) => {
             const card = document.createElement('div');
             card.className = 'project-card';
+
+            // Only the first page of projects shows initially; the rest are
+            // revealed by the "View more projects" button.
+            if (index >= PROJECTS_PER_PAGE) {
+                card.classList.add('is-hidden');
+            }
 
             // Image container keeps the aspect ratio and shows a gradient
             // placeholder while the photo loads.
@@ -661,8 +777,12 @@ fetch('data/projects.json')
                 }
             });
 
+            observeReveal(card);
             container.appendChild(card);
         });
+
+        // Set up the "View more projects" pagination button
+        initLoadMore();
     });
 
 // Load testimonials from JSON
@@ -673,10 +793,14 @@ fetch('data/testimonials.json')
         testimonials.forEach(testimonial => {
             const card = document.createElement('div');
             card.className = 'testimonial-card';
+            const rating = Math.max(0, Math.min(5, testimonial.rating || 5));
+            const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
             card.innerHTML = `
+                <div class="testimonial-stars" aria-label="${rating} out of 5 stars">${stars}</div>
                 <p>"${testimonial.quote}"</p>
                 <h4>- ${testimonial.author}</h4>
             `;
+            observeReveal(card);
             container.appendChild(card);
         });
     });
@@ -687,3 +811,14 @@ document.querySelector('.contact-form').addEventListener('submit', (e) => {
     alert(t('contact.successMsg'));
     e.target.reset();
 });
+
+
+// ===== Initialize modern UI behaviors =====
+// Render Lucide SVG icons (replaces the <i data-lucide> placeholders)
+if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    lucide.createIcons();
+}
+
+initScrollReveal();
+initCounters();
+initBackToTop();
