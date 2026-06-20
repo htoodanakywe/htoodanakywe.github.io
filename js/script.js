@@ -55,28 +55,31 @@ const lightboxState = {
     touchEndX: 0                      // Touch gesture tracking
 };
 
-// Data normalization function for backward compatibility
+// Default placeholder shown when a project has no browser-displayable images
+const DEFAULT_PROJECT_IMAGE = 'img/projects/projectdefault.JPG';
+
+// Browsers cannot render HEIC/HEIF images, so treat those as non-displayable.
+function isDisplayableImage(src) {
+    return typeof src === 'string' && !/\.(heic|heif)\s*$/i.test(src.trim());
+}
+
+// Data normalization: accepts an images[] array or a single image, and drops
+// formats browsers can't display (HEIC/HEIF). Falls back to a default image so
+// every project always has at least one valid thumbnail.
 function normalizeProjectData(project) {
-    // If project has 'images' array, use it
-    if (project.images && Array.isArray(project.images) && project.images.length > 0) {
-        return {
-            ...project,
-            images: project.images
-        };
+    let rawImages = [];
+
+    if (Array.isArray(project.images) && project.images.length > 0) {
+        rawImages = project.images;
+    } else if (project.image) {
+        rawImages = [project.image];
     }
-    
-    // If project has single 'image', convert to array
-    if (project.image) {
-        return {
-            ...project,
-            images: [project.image]
-        };
-    }
-    
-    // Fallback to default image
+
+    const displayable = rawImages.filter(isDisplayableImage);
+
     return {
         ...project,
-        images: ['img/projects/projectdefault.JPG']
+        images: displayable.length > 0 ? displayable : [DEFAULT_PROJECT_IMAGE]
     };
 }
 
@@ -572,35 +575,55 @@ fetch('data/projects.json')
         lightboxState.projects.forEach((project, index) => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            // Use first image from normalized images array
-            const imgUrl = project.images[0];
-            card.innerHTML = `
-                <div class="project-img" style="background-image: url('${imgUrl}')"></div>
-                <h3>${project.title}</h3>
-                <p>${project.details}</p>
-            `;
-            
-            // Get the project image element
-            const projectImg = card.querySelector('.project-img');
-            
-            // Add click event listener to open lightbox
-            projectImg.addEventListener('click', () => {
+
+            // Image container keeps the aspect ratio and shows a gradient
+            // placeholder while the photo loads.
+            const imgBox = document.createElement('div');
+            imgBox.className = 'project-img';
+
+            // Lazy-loaded thumbnail: the browser only fetches it when it scrolls
+            // near the viewport, which greatly reduces initial page load time.
+            const thumb = document.createElement('img');
+            thumb.src = project.images[0];
+            thumb.alt = project.title;
+            thumb.loading = 'lazy';
+            thumb.decoding = 'async';
+            thumb.addEventListener('load', () => thumb.classList.add('loaded'), { once: true });
+            thumb.addEventListener('error', () => {
+                // Fall back to the default image if the thumbnail fails to load
+                if (!thumb.src.endsWith(DEFAULT_PROJECT_IMAGE)) {
+                    thumb.src = DEFAULT_PROJECT_IMAGE;
+                }
+                thumb.classList.add('loaded');
+            }, { once: true });
+            imgBox.appendChild(thumb);
+
+            const title = document.createElement('h3');
+            title.textContent = project.title;
+
+            const details = document.createElement('p');
+            details.textContent = project.details;
+
+            card.appendChild(imgBox);
+            card.appendChild(title);
+            card.appendChild(details);
+
+            // Open the lightbox gallery on click
+            imgBox.addEventListener('click', () => {
                 openLightbox(index);
             });
-            
-            // Add keyboard accessibility
-            projectImg.setAttribute('tabindex', '0');
-            projectImg.setAttribute('role', 'button');
-            projectImg.setAttribute('aria-label', `View ${project.title} gallery`);
-            
-            // Add keydown handler for Enter and Space keys
-            projectImg.addEventListener('keydown', (e) => {
+
+            // Keyboard accessibility
+            imgBox.setAttribute('tabindex', '0');
+            imgBox.setAttribute('role', 'button');
+            imgBox.setAttribute('aria-label', `View ${project.title} gallery`);
+            imgBox.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     openLightbox(index);
                 }
             });
-            
+
             container.appendChild(card);
         });
     });
