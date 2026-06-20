@@ -67,7 +67,8 @@ const translations = {
             selectService: 'Select Service',
             detailsPlaceholder: 'Project Details',
             submit: 'Request Quote',
-            successMsg: 'Thank you for your message! We will contact you soon.'
+            successMsg: 'Thank you for your message! We will contact you soon.',
+            errorMsg: 'Sorry, something went wrong. Please try again or call us.'
         },
         footer: {
             tagline: 'Your trusted partner in construction and decoration since 2018',
@@ -148,7 +149,8 @@ const translations = {
             selectService: 'ဝန်ဆောင်မှု ရွေးချယ်ပါ',
             detailsPlaceholder: 'ပရောဂျက် အသေးစိတ်',
             submit: 'ကုန်ကျစရိတ် တောင်းဆိုရန်',
-            successMsg: 'သင့်မက်ဆေ့ချ်အတွက် ကျေးဇူးတင်ပါသည်။ မကြာမီ ဆက်သွယ်ပါမည်။'
+            successMsg: 'သင့်မက်ဆေ့ချ်အတွက် ကျေးဇူးတင်ပါသည်။ မကြာမီ ဆက်သွယ်ပါမည်။',
+            errorMsg: 'တောင်းပန်ပါသည်။ တစ်စုံတစ်ခု မှားယွင်းသွားပါသည်။ ထပ်မံကြိုးစားပါ သို့မဟုတ် ဖုန်းဆက်ပါ။'
         },
         footer: {
             tagline: '၂၀၁၈ ခုနှစ်မှစ၍ ဆောက်လုပ်ရေးနှင့် အလှဆင်ခြင်းတွင် သင့်ယုံကြည်ရသော လုပ်ဖော်ကိုင်ဖက်',

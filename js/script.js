@@ -951,13 +951,104 @@ fetch('data/testimonials.json')
         });
     });
 
-// Form submission
-document.querySelector('.contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert(t('contact.successMsg'));
-    e.target.reset();
-});
+// Contact form submission via Formspree (AJAX, no page redirect).
+// IMPORTANT: replace YOUR_FORM_ID in the form's action (index.html) with your
+// Formspree endpoint, e.g. action="https://formspree.io/f/abcdwxyz".
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    // Holds the auto-clear timer so a new message cancels the previous countdown.
+    let statusTimer;
 
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const status = contactForm.querySelector('.form-status');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const action = contactForm.getAttribute('action') || '';
+
+        const setStatus = (msg, ok) => {
+            if (!status) return;
+            status.textContent = msg;
+            status.classList.remove('success', 'error');
+            status.classList.add(ok ? 'success' : 'error');
+
+            // Auto-clear the message after 60 seconds (a new message resets it).
+            clearTimeout(statusTimer);
+            if (msg) {
+                statusTimer = setTimeout(() => {
+                    status.textContent = '';
+                    status.classList.remove('success', 'error');
+                }, 60000);
+            }
+        };
+
+        // Endpoint not configured yet -> tell the visitor instead of failing silently.
+        if (!action || action.indexOf('YOUR_FORM_ID') !== -1) {
+            setStatus(t('contact.errorMsg'), false);
+            return;
+        }
+
+        if (submitBtn) submitBtn.disabled = true;
+        try {
+            const res = await fetch(action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                setStatus(t('contact.successMsg'), true);
+                contactForm.reset();
+            } else {
+                let detail = '';
+                try {
+                    const data = await res.json();
+                    if (data && Array.isArray(data.errors)) {
+                        detail = data.errors.map((x) => x.message).join(', ');
+                    }
+                } catch (_) { /* ignore parse errors */ }
+                setStatus(detail || t('contact.errorMsg'), false);
+            }
+        } catch (err) {
+            setStatus(t('contact.errorMsg'), false);
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+        }
+    });
+}
+
+
+// Sticky header: shrink the nav once the page is scrolled.
+function initStickyNav() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
+
+// Scrollspy: highlight the nav link whose section is currently in view.
+function initScrollSpy() {
+    const links = {};
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach((a) => {
+        const id = a.getAttribute('href').slice(1);
+        if (id) links[id] = a;
+    });
+    const sections = Object.keys(links)
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+    if (!sections.length || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                Object.values(links).forEach((a) => a.classList.remove('active'));
+                if (links[entry.target.id]) links[entry.target.id].classList.add('active');
+            }
+        });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach((s) => observer.observe(s));
+}
 
 // ===== Initialize modern UI behaviors =====
 // Render Lucide SVG icons (replaces the <i data-lucide> placeholders)
@@ -968,3 +1059,5 @@ if (window.lucide && typeof window.lucide.createIcons === 'function') {
 initScrollReveal();
 initCounters();
 initBackToTop();
+initStickyNav();
+initScrollSpy();

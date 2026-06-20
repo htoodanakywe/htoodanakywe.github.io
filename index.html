@@ -172,16 +172,15 @@
                         <span class="icon">📞</span>
                         <div>
                             <h4 data-i18n="contact.phone">Phone</h4>
-                            <p>+95 9 254 230 958</p>
-                            <p>+95 9 987 767 095</p>
+                            <p><a href="tel:+959254230958">+95 9 254 230 958</a></p>
+                            <p><a href="tel:+959987767095">+95 9 987 767 095</a></p>
                         </div>
                     </div>
                     <div class="info-item">
                         <span class="icon">📧</span>
                         <div>
                             <h4 data-i18n="contact.email">Email</h4>
-                            <p>info@htoodanakywe.com</p>
-                            <p>contact@htoodanakywe.com</p>
+                            <p><a href="mailto:htoodanakywe007@gmail.com">htoodanakywe007@gmail.com</a></p>
                         </div>
                     </div>
                     <div class="info-item">
@@ -201,12 +200,19 @@
                             <p data-i18n="contact.sunday">Sunday: Closed</p>
                         </div>
                     </div>
+                    <div class="info-item">
+                        <span class="icon fb-emoji-blue-color">ⓕ</span>
+                        <div>
+                            <h4>Facebook</h4>
+                            <p><a href="https://www.facebook.com/share/1Cqfz3pcLE/?mibextid=wwXIfr" target="_blank" rel="noopener">Htoo Dana Kywe Construction Co.Ltd</a></p>
+                        </div>
+                    </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" data-i18n-placeholder="contact.namePlaceholder" placeholder="Your Name" required>
-                    <input type="tel" data-i18n-placeholder="contact.phonePlaceholder" placeholder="Your Phone" required>
-                    <input type="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Your Email" required>
-                    <select required>
+                <form class="contact-form" action="https://formspree.io/f/mwkanbjo" method="POST">
+                    <input type="text" name="name" data-i18n-placeholder="contact.namePlaceholder" placeholder="Your Name" required>
+                    <input type="tel" name="phone" data-i18n-placeholder="contact.phonePlaceholder" placeholder="Your Phone" required>
+                    <input type="email" name="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Your Email" required>
+                    <select name="service" required>
                         <option value="" data-i18n="contact.selectService">Select Service</option>
                         <option value="construction" data-i18n="services.construction">Building Construction</option>
                         <option value="interior" data-i18n="services.interior">Interior Design</option>
@@ -214,8 +220,9 @@
                         <option value="decoration" data-i18n="services.decoration">Decoration</option>
                         <option value="other">Other</option>
                     </select>
-                    <textarea data-i18n-placeholder="contact.detailsPlaceholder" placeholder="Project Details" rows="4" required></textarea>
+                    <textarea name="message" data-i18n-placeholder="contact.detailsPlaceholder" placeholder="Project Details" rows="4" required></textarea>
                     <button type="submit" class="btn" data-i18n="contact.submit">Request Quote</button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </div>
@@ -242,8 +249,10 @@
                 </div>
                 <div class="footer-section">
                     <h4 data-i18n="footer.contactTitle">Contact</h4>
-                    <p>📞 +95 9 123 456 789</p>
-                    <p>📧 info@htoodanakywe.com</p>
+                    <p>📞 <a href="tel:+959254230958">+95 9 254 230 958</a></p>
+                    <p>📞 <a href="tel:+959987767095">+95 9 987 767 095</a></p>
+                    <p>📧 <a href="mailto:htoodanakywe007@gmail.com">htoodanakywe007@gmail.com</a></p>
+                    <p>📘 <a href="https://www.facebook.com/share/1Cqfz3pcLE/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></p>
                 </div>
             </div>
             <div class="footer-bottom">

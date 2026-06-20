@@ -1238,3 +1238,99 @@ footer {
         transition: none;
     }
 }
+
+
+/* ===== Navigation polish: sticky shrink + active link ===== */
+nav .container {
+    transition: padding 0.3s ease;
+}
+
+.logo-img {
+    transition: height 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(12, 86, 80, 0.96);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+}
+
+nav.scrolled .container {
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+
+nav.scrolled .logo-img {
+    height: 32px;
+}
+
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a.active {
+    color: var(--gold);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+
+/* Offset anchored sections so headings aren't hidden under the fixed nav */
+section {
+    scroll-margin-top: 84px;
+}
+
+/* ===== Fluid typography (smooth scaling instead of breakpoint jumps) ===== */
+.hero-content h2 {
+    font-size: clamp(1.9rem, 6vw, 3.5rem);
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 2.4vw, 1.3rem);
+}
+
+.stat-num {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+}
+
+/* ===== Clickable contact links (tel:/mailto:) ===== */
+.info-item a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.info-item a:hover {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* ===== Contact form status message ===== */
+.form-status {
+    margin-top: 0.25rem;
+    font-weight: 600;
+    min-height: 1.2em;
+}
+
+.form-status.success {
+    color: var(--light-green);
+}
+
+.form-status.error {
+    color: #c0392b;
+}
+
+.fb-emoji-blue-color {
+    color: blue;
+}
