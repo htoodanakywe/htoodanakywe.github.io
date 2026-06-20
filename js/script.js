@@ -61,6 +61,46 @@ const DEFAULT_PROJECT_IMAGE = 'img/projects/projectdefault.JPG';
 // How many project cards to show before the "View more projects" button
 const PROJECTS_PER_PAGE = 6;
 
+// ===== Image delivery: optimize via a free resizing CDN on the live site =====
+// On a public host (e.g. GitHub Pages) images are routed through wsrv.nl, which
+// fetches the original from the site, resizes + compresses it to WebP, and
+// serves it from a fast cache. On localhost the proxy can't reach the origin,
+// so the local originals are used directly. Every use falls back to the
+// original (and then the default image) if a candidate fails to load.
+const IMG_HOST = location.hostname;
+const USE_IMG_PROXY = !!IMG_HOST &&
+    IMG_HOST !== 'localhost' &&
+    IMG_HOST !== '127.0.0.1' &&
+    IMG_HOST !== '0.0.0.0' &&
+    IMG_HOST !== '::1' &&
+    location.protocol !== 'file:';
+
+// Build a wsrv.nl URL that resizes/compresses the given image.
+function proxiedSrc(src, width, quality) {
+    try {
+        const abs = new URL(src, document.baseURI);
+        // Single-encode the decoded "host + path" so spaces and Burmese folder
+        // names survive correctly through the proxy.
+        const source = 'ssl:' + abs.host + decodeURIComponent(abs.pathname);
+        return 'https://wsrv.nl/?url=' + encodeURIComponent(source) +
+            '&w=' + width + '&q=' + quality + '&output=webp&we';
+    } catch (e) {
+        return src;
+    }
+}
+
+// Ordered source candidates (best first). Callers fall through to the next one
+// if a candidate fails to load.
+function thumbCandidates(src) {
+    return USE_IMG_PROXY ? [proxiedSrc(src, 600, 72), src] : [src];
+}
+function largeCandidates(src) {
+    return USE_IMG_PROXY ? [proxiedSrc(src, 1500, 80), src] : [src];
+}
+function thumbStripCandidates(src) {
+    return USE_IMG_PROXY ? [proxiedSrc(src, 160, 65), src] : [src];
+}
+
 // Browsers cannot render HEIC/HEIF images, so treat those as non-displayable.
 function isDisplayableImage(src) {
     return typeof src === 'string' && !/\.(heic|heif)\s*$/i.test(src.trim());
@@ -194,6 +234,7 @@ function renderLightbox() {
             <div class="lightbox-counter" aria-live="polite">
                 <span class="current-image">1</span> / <span class="total-images">1</span>
             </div>
+            <div class="lightbox-thumbs" aria-label="Image thumbnails"></div>
         </div>
     `;
     
@@ -205,7 +246,8 @@ function renderLightbox() {
         overlay.classList.add('fade-in');
     });
     
-    // Update image and navigation visibility
+    // Build the thumbnail filmstrip, then show the first image
+    buildThumbnails();
     updateImage();
     updateNavigationVisibility();
 }
@@ -324,6 +366,18 @@ function attachEventListeners() {
         };
         imageContainer.addEventListener('touchend', eventListeners.touchEnd);
     }
+
+    // 8. Thumbnail filmstrip clicks (event delegation)
+    eventListeners.thumbs = (e) => {
+        const btn = e.target.closest('.lightbox-thumb');
+        if (!btn) return;
+        const idx = parseInt(btn.dataset.index, 10);
+        if (!isNaN(idx)) goToImage(idx);
+    };
+    const thumbStrip = document.querySelector('.lightbox-thumbs');
+    if (thumbStrip) {
+        thumbStrip.addEventListener('click', eventListeners.thumbs);
+    }
 }
 
 // Detach event listeners function - removes all event listeners and cleans up references
@@ -344,6 +398,10 @@ function detachEventListeners() {
     const imageContainer = document.querySelector('.lightbox-image-container');
     imageContainer?.removeEventListener('touchstart', eventListeners.touchStart);
     imageContainer?.removeEventListener('touchend', eventListeners.touchEnd);
+
+    // Remove thumbnail strip listener
+    document.querySelector('.lightbox-thumbs')
+        ?.removeEventListener('click', eventListeners.thumbs);
     
     // Clear eventListeners object
     eventListeners = {};
@@ -354,30 +412,42 @@ function detachEventListeners() {
 const imageCache = new Map();      // url -> decoded HTMLImageElement
 const imagePromises = new Map();   // url -> Promise<HTMLImageElement|null>
 
-// Load (or reuse an in-flight load of) an image. Always resolves; on failure it
-// resolves to null so callers and the preload queue never get stuck.
-function loadImage(url) {
-    if (!url || typeof url !== 'string') return Promise.resolve(null);
-    if (imagePromises.has(url)) return imagePromises.get(url);
+// Load (or reuse an in-flight load of) an image. Accepts an ordered list of
+// candidate URLs and resolves with the first that loads, falling through to the
+// next on error. Always resolves; on total failure it resolves to null so
+// callers and the preload queue never get stuck. Deduped/cached by the first
+// candidate (the optimized URL), so previews and the lightbox share one entry.
+function loadImage(candidates) {
+    const list = (Array.isArray(candidates) ? candidates : [candidates])
+        .filter((u) => typeof u === 'string' && u);
+    if (list.length === 0) return Promise.resolve(null);
+
+    const key = list[0];
+    if (imagePromises.has(key)) return imagePromises.get(key);
 
     const promise = new Promise((resolve) => {
-        const img = new Image();
-        img.decoding = 'async';
-        img.onload = () => {
-            imageCache.set(url, img);
-            resolve(img);
+        let i = 0;
+        const attempt = () => {
+            if (i >= list.length) { resolve(null); return; }
+            const img = new Image();
+            img.decoding = 'async';
+            img.onload = () => {
+                imageCache.set(key, img);
+                resolve(img);
+            };
+            img.onerror = attempt; // fall through to the next candidate
+            img.src = list[i++];
         };
-        img.onerror = () => resolve(null);
-        img.src = url;
+        attempt();
     });
 
-    imagePromises.set(url, promise);
+    imagePromises.set(key, promise);
     return promise;
 }
 
-// Fire-and-forget preload helper
-function preloadImage(url) {
-    loadImage(url);
+// Fire-and-forget preload helper (builds large candidates for a source image)
+function preloadImage(src) {
+    loadImage(largeCandidates(src));
 }
 
 // Preload the images immediately around the current one (in parallel) so the
@@ -495,6 +565,60 @@ function handleSwipe() {
     // If swipe is below threshold, do nothing (prevents accidental navigation)
 }
 
+// Build the thumbnail filmstrip for the current project's images.
+function buildThumbnails() {
+    const strip = document.querySelector('.lightbox-thumbs');
+    if (!strip) return;
+
+    const project = lightboxState.projects[lightboxState.currentProjectIndex];
+    strip.innerHTML = '';
+
+    // A filmstrip only makes sense with more than one image.
+    if (!project || !Array.isArray(project.images) || project.images.length <= 1) {
+        strip.style.display = 'none';
+        return;
+    }
+    strip.style.display = 'flex';
+
+    project.images.forEach((src, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lightbox-thumb';
+        btn.dataset.index = String(idx);
+        btn.setAttribute('aria-label', 'View image ' + (idx + 1));
+
+        const im = document.createElement('img');
+        im.loading = 'lazy';
+        im.decoding = 'async';
+        im.alt = '';
+
+        // Tiny optimized thumb on the live site; fall back to original/default.
+        const sources = thumbStripCandidates(src);
+        sources.push(DEFAULT_PROJECT_IMAGE);
+        let si = 0;
+        im.addEventListener('error', () => {
+            if (si < sources.length) im.src = sources[si++];
+        });
+        im.src = sources[si++];
+
+        btn.appendChild(im);
+        strip.appendChild(btn);
+    });
+}
+
+// Jump straight to a specific image (used by thumbnail clicks).
+function goToImage(index) {
+    if (!lightboxState.isOpen) return;
+    const project = lightboxState.projects[lightboxState.currentProjectIndex];
+    if (!project || !Array.isArray(project.images)) return;
+    if (index < 0 || index >= project.images.length) return;
+    if (index === lightboxState.currentImageIndex) return;
+
+    lightboxState.currentImageIndex = index;
+    updateImage();
+    preloadAdjacentImages();
+}
+
 // Update image function - handles image loading, display, and counter updates
 function updateImage() {
     const project = lightboxState.projects[lightboxState.currentProjectIndex];
@@ -526,18 +650,20 @@ function updateImage() {
     // the user has already clicked again can be safely ignored (no flicker).
     const requestIndex = lightboxState.currentImageIndex;
     const altText = `${project.title} - Image ${requestIndex + 1}`;
+    const candidates = largeCandidates(imageUrl);
+    const cacheKey = candidates[0];
 
-    const showImage = () => {
-        imgElement.src = imageUrl;
+    const showImage = (loadedSrc) => {
+        imgElement.src = loadedSrc;
         imgElement.alt = altText;
         loader.style.display = 'none';
         loader.style.color = '';
         imgElement.style.opacity = '1';
     };
 
-    if (imageCache.has(imageUrl)) {
+    if (imageCache.has(cacheKey)) {
         // Already loaded -> show instantly, no "Loading..." flash
-        showImage();
+        showImage(imageCache.get(cacheKey).src);
     } else {
         // Keep the previous image visible but dimmed for instant feedback, and
         // only reveal the loader text if the load is actually slow (> 200ms).
@@ -548,14 +674,14 @@ function updateImage() {
             loader.style.color = '';
         }, 200);
 
-        loadImage(imageUrl).then((img) => {
+        loadImage(candidates).then((img) => {
             clearTimeout(loaderTimer);
 
             // Ignore if the user already navigated to a different image
             if (!lightboxState.isOpen || lightboxState.currentImageIndex !== requestIndex) return;
 
             if (img) {
-                showImage();
+                showImage(img.src);
             } else {
                 loader.style.display = 'block';
                 loader.textContent = 'Failed to load image';
@@ -576,6 +702,20 @@ function updateImage() {
     
     // 6. Hide counter if only one image
     counter.style.display = project.images.length > 1 ? 'block' : 'none';
+
+    // Sync the active thumbnail in the filmstrip and scroll it into view
+    const strip = document.querySelector('.lightbox-thumbs');
+    if (strip) {
+        const thumbs = strip.querySelectorAll('.lightbox-thumb');
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === lightboxState.currentImageIndex));
+        const active = thumbs[lightboxState.currentImageIndex];
+        if (active) {
+            const sRect = strip.getBoundingClientRect();
+            const tRect = active.getBoundingClientRect();
+            const delta = (tRect.left + tRect.width / 2) - (sRect.left + sRect.width / 2);
+            if (Math.abs(delta) > 1) strip.scrollBy({ left: delta, behavior: 'smooth' });
+        }
+    }
 }
 
 // Update navigation visibility function - shows/hides navigation buttons based on image count
@@ -735,20 +875,26 @@ fetch('data/projects.json')
             imgBox.className = 'project-img';
 
             // Lazy-loaded thumbnail: the browser only fetches it when it scrolls
-            // near the viewport, which greatly reduces initial page load time.
+            // near the viewport. Sources are tried best-first:
+            // optimized (CDN) -> original -> default placeholder.
             const thumb = document.createElement('img');
-            thumb.src = project.images[0];
             thumb.alt = project.title;
             thumb.loading = 'lazy';
             thumb.decoding = 'async';
-            thumb.addEventListener('load', () => thumb.classList.add('loaded'), { once: true });
+
+            const thumbSources = thumbCandidates(project.images[0]);
+            thumbSources.push(DEFAULT_PROJECT_IMAGE);
+            let thumbIndex = 0;
+
+            thumb.addEventListener('load', () => thumb.classList.add('loaded'));
             thumb.addEventListener('error', () => {
-                // Fall back to the default image if the thumbnail fails to load
-                if (!thumb.src.endsWith(DEFAULT_PROJECT_IMAGE)) {
-                    thumb.src = DEFAULT_PROJECT_IMAGE;
+                if (thumbIndex < thumbSources.length) {
+                    thumb.src = thumbSources[thumbIndex++];
+                } else {
+                    thumb.classList.add('loaded');
                 }
-                thumb.classList.add('loaded');
-            }, { once: true });
+            });
+            thumb.src = thumbSources[thumbIndex++];
             imgBox.appendChild(thumb);
 
             const title = document.createElement('h3');
