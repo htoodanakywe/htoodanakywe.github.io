@@ -130,8 +130,9 @@ function openLightbox(projectIndex) {
         lightboxContainer.focus();
     }
     
-    // 8. Preload adjacent images
+    // 8. Preload adjacent images now, then warm the rest of the gallery
     preloadAdjacentImages();
+    preloadAllProjectImages();
 }
 
 // Close lightbox function - applies fade-out animation and cleans up
@@ -182,7 +183,7 @@ function renderLightbox() {
             <div class="lightbox-content">
                 <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&#10094;</button>
                 <div class="lightbox-image-container">
-                    <img class="lightbox-image" src="" alt="" />
+                    <img class="lightbox-image" src="" alt="" decoding="async" />
                     <div class="lightbox-loader" aria-live="polite">Loading...</div>
                 </div>
                 <button class="lightbox-nav lightbox-next" aria-label="Next image">&#10095;</button>
@@ -345,53 +346,78 @@ function detachEventListeners() {
     eventListeners = {};
 }
 
-// Image cache for preloading
-const imageCache = new Map();
+// Image preloading caches. imagePromises dedupes in-flight loads by URL so the
+// same photo is never requested twice; imageCache holds fully-loaded Images.
+const imageCache = new Map();      // url -> decoded HTMLImageElement
+const imagePromises = new Map();   // url -> Promise<HTMLImageElement|null>
 
-function preloadImage(url) {
-    // Validate URL
-    if (!url || typeof url !== 'string') {
-        console.warn('Invalid URL provided to preloadImage:', url);
-        return;
-    }
-    
-    // Skip if already cached
-    if (imageCache.has(url)) return;
-    
-    const img = new Image();
-    img.onload = () => {
-        imageCache.set(url, img);
-    };
-    img.onerror = () => {
-        // Silently fail for preloading - don't cache failed images
-        console.debug(`Failed to preload image: ${url}`);
-    };
-    img.src = url;
+// Load (or reuse an in-flight load of) an image. Always resolves; on failure it
+// resolves to null so callers and the preload queue never get stuck.
+function loadImage(url) {
+    if (!url || typeof url !== 'string') return Promise.resolve(null);
+    if (imagePromises.has(url)) return imagePromises.get(url);
+
+    const promise = new Promise((resolve) => {
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => {
+            imageCache.set(url, img);
+            resolve(img);
+        };
+        img.onerror = () => resolve(null);
+        img.src = url;
+    });
+
+    imagePromises.set(url, promise);
+    return promise;
 }
 
+// Fire-and-forget preload helper
+function preloadImage(url) {
+    loadImage(url);
+}
+
+// Preload the images immediately around the current one (in parallel) so the
+// very next click is instant.
 function preloadAdjacentImages() {
     const project = lightboxState.projects[lightboxState.currentProjectIndex];
-    
-    // Validate project data
-    if (!project || !project.images || !Array.isArray(project.images)) {
-        console.warn('Invalid project data in preloadAdjacentImages');
-        return;
-    }
-    
-    const totalImages = project.images.length;
-    
-    // Skip preloading for single-image projects
-    if (totalImages <= 1) return;
-    
-    const currentIndex = lightboxState.currentImageIndex;
-    
-    // Calculate adjacent indices with wrapping
-    const nextIndex = (currentIndex + 1) % totalImages;
-    const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
-    
-    // Preload next and previous images
-    preloadImage(project.images[nextIndex]);
-    preloadImage(project.images[prevIndex]);
+    if (!project || !Array.isArray(project.images)) return;
+
+    const total = project.images.length;
+    if (total <= 1) return;
+
+    const i = lightboxState.currentImageIndex;
+    preloadImage(project.images[(i + 1) % total]);          // next
+    preloadImage(project.images[(i + 2) % total]);          // next + 1
+    preloadImage(project.images[(i - 1 + total) % total]);  // previous
+}
+
+// Warm the rest of the gallery in the background, one image at a time so it
+// doesn't steal bandwidth from the visible image. Walks forward from the
+// current image, so by the time the user clicks through they're already cached.
+function preloadAllProjectImages() {
+    const projectIndex = lightboxState.currentProjectIndex;
+    const project = lightboxState.projects[projectIndex];
+    if (!project || !Array.isArray(project.images)) return;
+
+    const images = project.images;
+    const total = images.length;
+    if (total <= 1) return;
+
+    const start = lightboxState.currentImageIndex;
+    let step = 1;
+
+    const loadNext = () => {
+        // Stop if the lightbox closed or a different project was opened
+        if (!lightboxState.isOpen || lightboxState.currentProjectIndex !== projectIndex) return;
+        if (step >= total) return;
+
+        const url = images[(start + step) % total];
+        step++;
+        loadImage(url).then(loadNext);
+    };
+
+    loadNext();
 }
 
 // Navigate to next image function - handles forward navigation with wrapping
@@ -493,37 +519,48 @@ function updateImage() {
         return;
     }
     
-    // 1. Show loading indicator and hide image
-    loader.style.display = 'block';
-    loader.textContent = 'Loading...';
-    loader.style.color = '';
-    imgElement.style.opacity = '0';
-    
-    // 2. Create new Image object for preloading
-    const newImg = new Image();
-    
-    // 3. Handle image.onload event
-    newImg.onload = () => {
-        // Display image with project title and image number
+    // Capture which image this call is for, so a slow load that finishes after
+    // the user has already clicked again can be safely ignored (no flicker).
+    const requestIndex = lightboxState.currentImageIndex;
+    const altText = `${project.title} - Image ${requestIndex + 1}`;
+
+    const showImage = () => {
         imgElement.src = imageUrl;
-        imgElement.alt = `${project.title} - Image ${lightboxState.currentImageIndex + 1}`;
-        
-        // Hide loader and apply fade-in
+        imgElement.alt = altText;
         loader.style.display = 'none';
+        loader.style.color = '';
         imgElement.style.opacity = '1';
     };
-    
-    // 4. Handle image.onerror event - navigation still works after error
-    newImg.onerror = () => {
-        // Show error message and keep image hidden
-        loader.textContent = 'Failed to load image';
-        loader.style.color = '#ff6b6b';
-        imgElement.style.opacity = '0';
-        // Note: Navigation buttons remain functional, allowing user to try other images
-    };
-    
-    // Start loading the image
-    newImg.src = imageUrl;
+
+    if (imageCache.has(imageUrl)) {
+        // Already loaded -> show instantly, no "Loading..." flash
+        showImage();
+    } else {
+        // Keep the previous image visible but dimmed for instant feedback, and
+        // only reveal the loader text if the load is actually slow (> 200ms).
+        imgElement.style.opacity = '0.35';
+        const loaderTimer = setTimeout(() => {
+            loader.style.display = 'block';
+            loader.textContent = 'Loading...';
+            loader.style.color = '';
+        }, 200);
+
+        loadImage(imageUrl).then((img) => {
+            clearTimeout(loaderTimer);
+
+            // Ignore if the user already navigated to a different image
+            if (!lightboxState.isOpen || lightboxState.currentImageIndex !== requestIndex) return;
+
+            if (img) {
+                showImage();
+            } else {
+                loader.style.display = 'block';
+                loader.textContent = 'Failed to load image';
+                loader.style.color = '#ff6b6b';
+                imgElement.style.opacity = '0';
+            }
+        });
+    }
     
     // 5. Update counter display (current/total)
     const currentImageSpan = document.querySelector('.current-image');
